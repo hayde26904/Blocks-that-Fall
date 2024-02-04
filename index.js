@@ -1,6 +1,10 @@
 let canvas;
 let ctx;
 let game;
+let cols = 10;
+let rows = 15;
+let cellWidth;
+let cellHeight;
 
 window.onload = function(){
     canvas = document.getElementById("canvas");
@@ -10,7 +14,13 @@ window.onload = function(){
     canvas.width = window.innerWidth/3;
     canvas.height = window.innerHeight;
 
-    game = new Game();
+    cellWidth = Math.floor(canvas.width / cols);
+    cellHeight = Math.floor(canvas.height / rows);
 
-    setInterval(game.step.bind(game), 0);
+    game = new Game();
+    game.update();
+
+    window.onresize = game.canvasResize;
+
+    console.log(game.board.pieces[0]);
 }
