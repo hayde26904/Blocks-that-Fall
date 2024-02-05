@@ -21,6 +21,11 @@ class Board {
         this.drawGridLines();
     }
 
+    update(){
+        this.updatePieces();
+        this.draw();
+    }
+
     setupMap(){
         for(let i = 0; i < this.rows; i++){
             let newRow = [];
@@ -35,6 +40,19 @@ class Board {
         for(const piece of this.pieces){
             piece.draw();
         }
+    }
+
+    updatePieces(){
+        for(const piece of this.pieces){
+            piece.update();
+            if(piece.blocks[piece.blocks.length-1].y == rows-1){
+                piece.locked = true;
+            }
+        }
+    }
+
+    checkPieceCollision(piece1, piece2){
+        
     }
 
     drawGridLines(){

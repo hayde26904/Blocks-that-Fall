@@ -1,56 +1,16 @@
 class Piece {
     constructor(shape){
-        this.shapeDict = {
-
-            "O" : [
-                [1,1],
-                [1,1]
-            ],
-
-            "I" : [
-                [1],
-                [1],
-                [1],
-                [1]
-            ],
-
-            "S" : [
-                [0,1,1],
-                [1,1,0]
-            ],
-
-            "Z" : [
-                [1,1,0],
-                [0,1,1]
-            ],
-
-            "L" : [
-                [1,0],
-                [1,0],
-                [1,1]
-            ],
-
-            "J" : [
-                [0,1],
-                [0,1],
-                [1,1]
-            ],
-
-            "T" : [
-                [1,1,1],
-                [0,1,0]
-            ],
-
-        }
 
         this.colors = ['red','green','blue','yellow','orange','pink']
 
-        this.shape = this.shapeDict[shape.toUpperCase()];
+        this.shape = shapeDict[shape.toUpperCase()];
         this.color = this.colors[Math.floor(Math.random()*this.colors.length)];
 
         this.blocks = [];
         this.x = 0;
         this.y = 0;
+
+        this.locked = false;
 
         this.createBlocks();
 
@@ -67,9 +27,41 @@ class Piece {
         }
     }
 
+    rotate() {
+        const rows = this.shape.length;
+        const cols = this.shape[0].length;
+    
+        // Transpose the this.shape (switch rows with columns)
+        const transpose = [];
+        for (let j = 0; j < cols; j++) {
+            transpose[j] = [];
+            for (let i = 0; i < rows; i++) {
+                transpose[j].push(this.shape[i][j]);
+            }
+        }
+    
+        // Reverse each row of the transposed this.shape
+        this.shape = transpose.map(row => row.reverse());
+        for(let row = 0; row < this.shape.length; row++){
+            for(let col = 0; col < this.shape[row].length; col++){
+                if(this.shape[row][col] == 1){
+                    
+                }
+            }
+        }
+    }
+
     draw(){
         for(const block of this.blocks){
             block.draw();
+        }
+    }
+
+    update(){
+        for(const block of this.blocks){
+            if(!this.locked){
+                block.update();
+            }
         }
     }
 }

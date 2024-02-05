@@ -3,6 +3,9 @@ class Block {
         this.x = x;
         this.y = y;
         this.c = color;
+        this.dropSpeed = 70;
+        this.dropTimer = 100 - this.dropSpeed;
+        this.dropCooldown = this.dropTimer;
     }
 
     draw(){
@@ -11,6 +14,11 @@ class Block {
     }
 
     update(){
-        
+        this.dropCooldown--;
+        if(this.dropCooldown <= 0){
+            this.y++;
+            this.dropTimer = 100 - this.dropSpeed;
+            this.dropCooldown = this.dropTimer;
+        }
     }
 }
