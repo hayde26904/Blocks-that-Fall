@@ -20,5 +20,7 @@ class Block {
             this.dropTimer = 100 - this.dropSpeed;
             this.dropCooldown = this.dropTimer;
         }
+
+        
     }
 }

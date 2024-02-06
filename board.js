@@ -16,14 +16,19 @@ class Board {
 
         ctx.fillStyle = this.bgColor;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
-        this.drawPieces();
+
         this.drawGridLines();
     }
 
     update(){
-        this.updatePieces();
+        this.drawAndUpdatePieces();
         this.draw();
+    }
+
+    drawAndUpdatePieces(){
+        for(const piece of this.pieces){
+            piece.drawAndUpdate();
+        }
     }
 
     setupMap(){
@@ -33,21 +38,6 @@ class Board {
                 newRow.push(0);
             }
             this.map.push(newRow);
-        }
-    }
-
-    drawPieces(){
-        for(const piece of this.pieces){
-            piece.draw();
-        }
-    }
-
-    updatePieces(){
-        for(const piece of this.pieces){
-            piece.update();
-            if(piece.blocks[piece.blocks.length-1].y == rows-1){
-                piece.locked = true;
-            }
         }
     }
 
